@@ -1,0 +1,60 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Nova audit harness</title>
+<style>
+body{font:15px/1.5 system-ui,sans-serif;margin:0;background:#f5f6f8;color:#1c2330}
+header{background:#1c2330;color:#fff;padding:14px 24px}header small{opacity:.7;margin-left:10px}
+main{max-width:1000px;margin:0 auto;padding:18px}
+.panel{background:#fff;border-radius:10px;padding:16px;margin-bottom:16px;box-shadow:0 1px 3px #0001}
+select,input,button{font:inherit;padding:6px 10px;margin:4px 8px 4px 0}
+button{background:#2b6cf6;color:#fff;border:0;border-radius:6px;cursor:pointer}
+.row{display:flex;flex-wrap:wrap;align-items:center}
+.card{background:#fff;border-left:6px solid #888;border-radius:8px;padding:12px 16px;margin-bottom:12px;box-shadow:0 1px 3px #0001}
+.finding{border-color:#d9534f}.conflict{border-color:#e69500}.cannot_determine{border-color:#7a5af8}.no_finding{border-color:#2e9e5b}
+.tag{display:inline-block;padding:1px 8px;border-radius:10px;font-size:12px;color:#fff;background:#666;margin-right:6px}
+.big{font-size:20px;font-weight:600}
+details{margin-top:6px}summary{cursor:pointer;color:#2b6cf6}
+.ev{background:#f0f2f6;border-radius:6px;padding:6px 10px;margin:6px 0;font-size:13px}.ev b{color:#555}
+.note{color:#555;font-size:13px;white-space:pre-wrap}
+.bar{height:8px;background:#e2e5ea;border-radius:4px;width:120px;display:inline-block;vertical-align:middle}
+.bar i{display:block;height:8px;background:#2b6cf6;border-radius:4px}
+</style></head><body>
+<header><b>Nova freight-invoice audit</b><small>runs the real ingest → report commands</small></header>
+<main>
+<div class="panel">
+ <div class="row">
+  <label>Mailbox <select id="box"></select></label>
+  <label>Mode <select id="mode"><option>supervised</option><option>autonomous</option></select></label>
+  <label>Report as of <input id="asof" size="11"></label>
+  <label><input type="checkbox" id="fb" checked> apply the feedback file(s)</label>
+  <button id="go">Run</button>
+ </div>
+ <div id="note" class="note"></div>
+</div>
+<div id="out"></div>
+</main>
+<script>
+const $=id=>document.getElementById(id);let boxes=[];
+const esc=s=>String(s??"").replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+fetch("/api/mailboxes").then(r=>r.json()).then(b=>{boxes=b;$("box").innerHTML=b.map((x,i)=>`<option value="${i}">${esc(x.label)}</option>`).join("");pick()});
+function pick(){const b=boxes[$("box").value];$("asof").value=b.as_of;if(b.mode)$("mode").value=b.mode;$("note").textContent=b.note||"";}
+$("box").onchange=pick;
+$("go").onclick=async()=>{
+ const b=boxes[$("box").value];$("out").innerHTML='<div class="panel">Running ingest and report… (can take a minute)</div>';
+ const q=new URLSearchParams({id:b.id,mode:$("mode").value,as_of:$("asof").value,feedback:$("fb").checked?1:0});
+ const r=await (await fetch("/api/run?"+q)).json();render(r);};
+function money(f){return f.amount_usd?"$"+f.amount_usd:f.amount_range?("$"+f.amount_range[0]+" – $"+f.amount_range[1]):""}
+function render(r){
+ let h="";if(r.errors.length)h+=`<div class="panel" style="color:#b00">${r.errors.map(esc).join("<br>")}</div>`;
+ if(!r.report){$("out").innerHTML=h;return}
+ const all=[...r.report.findings,...Object.values(r.report.portfolio||{}).flat()];
+ const tot=all.filter(f=>f.verdict==="finding"&&f.amount_usd).reduce((a,f)=>a+parseFloat(f.amount_usd),0);
+ h+=`<div class="panel"><span class="big">${all.length} item(s)</span> as of ${esc(r.report.as_of)}, ${esc(r.report.mode)} mode — amounts found: <b>$${tot.toFixed(2)}</b><div class="note">${r.log.map(esc).join("\n")}</div></div>`;
+ if(!all.length)h+=`<div class="panel">Nothing reported — the harness found no problems in this mailbox on this date.</div>`;
+ for(const f of all){
+  h+=`<div class="card ${f.verdict}"><span class="tag">${esc(f.class)}</span><span class="tag" style="background:#444">${esc(f.verdict)}</span>
+  <b>${esc(f.invoice_id||f.id)}</b> <span class="big" style="float:right">${esc(money(f))}</span><br>
+  Action: <b>${esc(f.action)}</b> &nbsp; Confidence: ${f.confidence} <span class="bar"><i style="width:${(f.confidence||0)*100}%"></i></span>
+  ${f.deadline?`&nbsp; Deadline: ${esc(f.deadline)}`:""}${f.missing_doc?`<br>Missing document: ${esc(JSON.stringify(f.missing_doc))}`:""}
+  ${(f.supersedes||[]).length?`<br>Replaces earlier item(s): ${esc(f.supersedes.join(", "))}`:""}${f.learned_at?`<br>Changed because of feedback: ${esc(JSON.stringify(f.learned_at))}`:""}
+  <details><summary>${(f.evidence||[]).length} evidence quote(s)</summary>${(f.evidence||[]).map(e=>`<div class="ev"><b>${esc(e.doc)} p.${e.page}</b><br>“${esc(e.quote)}”</div>`).join("")}</details></div>`;}
+ $("out").innerHTML=h;}
+</script></body></html>

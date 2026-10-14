@@ -207,7 +207,7 @@ def resolve_rate(w: World, c: Contract, fb: Feedback, lane: str, pickup) -> Reso
 # ---------------------------------------------------------------------------------------------------------------------
 def norm_desc(s: str) -> str:
     s = re.sub(r"\(.*?\)", " ", s or "")
-    return re.sub(r"[^a-z0-9]+", " ", s.lower()).strip()
+    return re.sub(r"[^a-z0-9]+", "", s.lower())      # spaces dropped: OCR output has none
 
 
 def code_of(c: Contract, desc: str) -> str | None:
@@ -341,6 +341,8 @@ def price_invoice(w: World, rec: dict, c: Contract, fb: Feedback, pick: dict | N
                     why = "security"
             elif code in ("DG", "DRYICE"):
                 corr, evs, why = _dg_line(w, c, awb, code, ln)
+            elif code == "PEAK":
+                corr, evs, why = _peak_line(w, c, ln, pdt)
             elif code == "STOR":
                 corr, evs, why = _storage_line(w, c, awb, ln)
             elif code == "DLV":
@@ -428,8 +430,10 @@ def _storage_line(w, c, awb, ln):
 def _delivery_line(w, c, awb, ln):
     ev_list = w.events(awb)
     fe = fee_of(c, "DLV")
-    if not ev_list or not fe:
+    if not fe:
         return None, [], ""
+    if not ev_list:
+        return money(Decimal(str(fe["fee"]))), [{"doc": c.msa_doc["ref"], "page": fe["page"], "quote": fe["line"]}], "delivery_fee"
     col = next((e for e in ev_list if e["event"] == "COLLECTED_BY_CONSIGNEE"), None)
     dlv = next((e for e in ev_list if e["event"] == "DELIVERED"), None)
     ev = []
@@ -460,3 +464,22 @@ def _customs_line(w, c, awb, ln):
     if carrier_fault:
         return money(0), ev, "customs_carrier_fault"
     return money(Decimal(str(fe["fee"]))), ev, "customs_fee"
+
+
+MONTHS = {m: i for i, m in enumerate(["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"], 1)}
+
+
+def _peak_line(w, c, ln, pickup):
+    fe = fee_of(c, "PEAK")
+    if not fe or not ln.get("qty"):
+        return None, [], ""
+    text = " ".join(w.by_ref[c.msa_doc["ref"]]["pages"])
+    m = re.search(r"PEAK[^\n]*?pickups in\s+([A-Za-z]+)\s+to\s+([A-Za-z]+)", re.sub(r"\s+", " ", text), re.I)
+    if not m or m.group(1).lower() not in MONTHS or m.group(2).lower() not in MONTHS:
+        return None, [], ""
+    a, b = MONTHS[m.group(1).lower()], MONTHS[m.group(2).lower()]
+    inside = (a <= pickup.month <= b) if a <= b else (pickup.month >= a or pickup.month <= b)
+    ev = [{"doc": c.msa_doc["ref"], "page": fe["page"], "quote": fe["line"]}]
+    if not inside:
+        return money(0), ev, "peak_out_of_season"
+    return money(Decimal(str(fe["fee"])) * Decimal(str(ln["qty"]))), ev, "peak"
