@@ -1,0 +1,11 @@
+name: as_of before the AP register arrives
+mailbox: evals/mailboxes/du_before_ledger
+as_of: '2033-02-27'
+mode: supervised
+expect:
+  key:
+    invoice_id: TX-US-2033-5511
+    class: duplicate
+  verdict: no_finding
+why: The register is dated 2033-02-28; a report as of 2033-02-27 cannot use it, so
+  the key must be absent.

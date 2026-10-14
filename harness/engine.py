@@ -840,13 +840,31 @@ def expiry(ctx: Ctx):
         deadline = end
         auto = c.term("auto_renews")
         t23 = (c.clause("2.3") or {}).get("text", "")
-        if auto is None and re.search(r"renews? automatically|automatically renews?|renew(?:s|ed)? for (?:successive|further)", t23, re.I) \
-                and not re.search(r"does not (?:renew|continue)", t23, re.I):
-            m = re.search(r"(\d+)\s*days", t23)
-            if m:
-                from datetime import timedelta
-                deadline = end - timedelta(days=int(m.group(1)))
-                ev = [clause_ev(c, "2.3", 400), clause_ev(c, "2.2")] + ev
+        renews = auto is True or (auto is None and re.search(r"renews? automatically|automatically renews?|renew(?:s|ed)? for (?:successive|further)", t23, re.I)
+                                  and not re.search(r"does not (?:renew|continue)", t23, re.I))
+        if renews:
+            from datetime import timedelta
+            months = c.term("renewal_term_months")
+            if not months:
+                mm = re.search(r"(\d+)[- ]months?", t23)
+                months = int(mm.group(1)) if mm else 12
+            days = c.term("notice_days")
+            if not days:
+                dm = re.search(r"(\d+)\s*days", t23)
+                days = int(dm.group(1)) if dm else None
+            nd = pdate(c.term("notice_deadline"))
+            cur_end = end
+            # the contract has renewed every time the end date has passed
+            while cur_end < w.asd - timedelta(days=0) and months:
+                cur_end = add_months(cur_end, months)
+            deadline = (cur_end - timedelta(days=days)) if days else cur_end
+            if nd and nd >= w.asd and cur_end == end:
+                deadline = nd
+            if deadline < w.asd and days:
+                # notice date for this cycle has passed; the next one is for the following renewal
+                nxt = add_months(cur_end, months)
+                deadline = nxt - timedelta(days=days)
+            ev = [clause_ev(c, "2.3", 400), clause_ev(c, "2.2")] + ev
         gap = (deadline - w.asd).days
         if 0 <= gap <= 60:
             it = item("expiry", {"contract_id": c.id}, "finding", action="internal:alert", conf=0.95, ev=ev, deadline=deadline.isoformat())
@@ -960,6 +978,7 @@ def build_report(state_dir: str, as_of: str, mode: str = "supervised") -> dict:
     late_fees_not_owed(ctx)
     late_fee_risk(ctx)
     cashback(ctx)
+    margin_step_down(ctx)
     expiry(ctx)
     # feedback can close or reject any invoice key
     keep = []
@@ -982,3 +1001,60 @@ def build_report(state_dir: str, as_of: str, mode: str = "supervised") -> dict:
     d.mkdir(parents=True, exist_ok=True)
     (d / f"{as_of}_{mode}.json").write_text(json.dumps(rep, indent=1))
     return rep
+
+
+# ---------------------------------------------------------------------------------------------------------------------
+def margin_step_down(ctx: Ctx):
+    """A handling margin that should have stepped down once cumulative spend crossed the contract's threshold: the margin
+    billed on every later invoice above the stepped-down rate, summed per quarter (one cashback item per quarter)."""
+    from collections import defaultdict
+    w = ctx.w
+    for c in w.contracts.values():
+        hm, sd = c.term("handling_margin"), c.term("margin_step_down")
+        if not isinstance(sd, dict) or not sd.get("threshold") or sd.get("new_margin_pct") is None:
+            continue
+        thr, newp = Decimal(str(sd["threshold"])), Decimal(str(sd["new_margin_pct"]))
+        per = (sd.get("per") or "").lower()
+        seen, recs = set(), []
+        for rec in w.invoices:
+            k = norm_inv(rec["d"]["invoice_id"])
+            if w.contract_of(rec) is c and k not in seen and pdate(rec["d"].get("invoice_date")):
+                seen.add(k)
+                recs.append(rec)
+        recs.sort(key=lambda r: (r["d"]["invoice_date"], r["doc"]["received_ts"]))
+        cum, bucket, crossed = Decimal(0), None, False
+        over = defaultdict(lambda: Decimal(0))
+        ev_by = defaultdict(list)
+        for rec in recs:
+            d = rec["d"]
+            idate = pdate(d["invoice_date"])
+            win = quarter_of(idate) if "quarter" in per else (str((idate - pdate(c.term("effective_date"))).days // 365) if "year" in per else "all")
+            if win != bucket:
+                bucket, cum, crossed = win, Decimal(0), False
+            if crossed:
+                for ln in d["lines"]:
+                    if ln["kind"] == "charge" and re.search(r"margin", ln["desc"] or "", re.I):
+                        base = Decimal(str(ln["base"])) if ln.get("base") else None
+                        if base is None and ln.get("pct"):
+                            base = money(Decimal(str(ln["amount"])) / Decimal(str(ln["pct"])) * 100)
+                        if base is None:
+                            continue
+                        diff = money(ln["amount"]) - money(base * newp / 100)
+                        if diff > 0:
+                            usd, _ = w.to_usd(c, diff, d["invoice_date"], d.get("currency", "USD"))
+                            if usd is not None:
+                                over[quarter_of(idate)] += usd
+                                ev_by[quarter_of(idate)].append({"doc": rec["doc"]["ref"], "page": ln.get("page", 1), "quote": ln["raw"]})
+            q, _e, miss = qualifying_native(c, d), None, None
+            usd, _ = w.to_usd(c, q, d["invoice_date"], d.get("currency", "USD"))
+            cum += usd or Decimal(0)
+            if cum >= thr:
+                crossed = True
+        for q, amt in over.items():
+            if not (w.asd > quarter_end(q)):
+                continue
+            held, _ = credits_held(ctx, c, "margin_step_down", q)
+            owed = amt - held
+            if owed > 0:
+                ev = ev_by[q][:4] + [clause_ev(c, "8.2", 400), clause_ev(c, "8.1", 300)]
+                _emit_cashback(ctx, c, q, "margin_step_down", owed, quarter_end(q), 0, ev)

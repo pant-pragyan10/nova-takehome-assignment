@@ -1,0 +1,13 @@
+name: billed above the per-shipment minimum
+mailbox: evals/mailboxes/oc_minimum_charge
+as_of: '2032-08-31'
+mode: supervised
+expect:
+  key:
+    invoice_id: TX-US-2032-9001
+    class: overcharge
+  verdict: finding
+  amount_usd: '14.42'
+  action: draft:dispute
+why: 5 kg x 7.73 = 38.65 is below the 58.00 minimum, so the minimum applies; 70.00
+  is 12.00 too much (plus fuel on it).

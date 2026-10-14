@@ -1,0 +1,11 @@
+name: 100 kg sits in the 100-299.5 band
+mailbox: evals/mailboxes/oc_band_edge_clean
+as_of: '2032-08-31'
+mode: supervised
+expect:
+  key:
+    invoice_id: TX-US-2032-9001
+    class: overcharge
+  verdict: no_finding
+why: 100.0 kg is the lowest weight of band 100-299.5 (6.01 in P1); billing 6.01 is
+  right, the heavier-band rate would be wrong.

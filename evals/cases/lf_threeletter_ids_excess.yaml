@@ -1,0 +1,13 @@
+name: 'late fee billed on a three-letter invoice number: excess'
+mailbox: evals/mailboxes/lf_threeletter_ids_excess
+as_of: '2032-03-31'
+mode: supervised
+expect:
+  key:
+    invoice_id: ABC-2000002
+    class: late_fee_not_owed
+  verdict: finding
+  amount_usd: '1.00'
+  action: draft:dispute
+why: 'Paid 10 days after the due date, grace 0: one month at 1.19% of 1000.00 = 11.90
+  is owed. Regression for the register parser reading the invoice number as an amount.'

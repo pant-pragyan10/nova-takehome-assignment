@@ -1,0 +1,15 @@
+name: quarter closed, credit not yet due
+mailbox: evals/mailboxes/cb_not_yet_due
+as_of: '2033-07-10'
+mode: supervised
+expect:
+  key:
+    contract_id: TBX-US-EXP-E58
+    period: 2033-Q2
+    credit_type: rebate
+    class: cashback
+  verdict: finding
+  amount_usd: '3278.35'
+  action: internal:track_credit
+why: Rebate credit notes are issued within 45 days after quarter end (2033-08-14);
+  on 2033-07-10 it is earned but not due.

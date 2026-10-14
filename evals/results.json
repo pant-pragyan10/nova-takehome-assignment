@@ -1,0 +1,129 @@
+{
+ "harness": "harness/harness.py",
+ "passed": 20,
+ "total": 20,
+ "your_cases": 18,
+ "score": 1.0,
+ "cases": [
+  {
+   "case": "cb_not_yet_due.yaml",
+   "name": "quarter closed, credit not yet due",
+   "pass": true,
+   "diff": []
+  },
+  {
+   "case": "du_before_ledger.yaml",
+   "name": "as_of before the AP register arrives",
+   "pass": true,
+   "diff": []
+  },
+  {
+   "case": "du_big_autonomous.yaml",
+   "name": "duplicate of 5000+ goes to human review (autonomous)",
+   "pass": true,
+   "diff": []
+  },
+  {
+   "case": "du_big_supervised.yaml",
+   "name": "duplicate of 5000+ goes to human review (supervised)",
+   "pass": true,
+   "diff": []
+  },
+  {
+   "case": "du_marked_copy.yaml",
+   "name": "resend marked as a copy for your records",
+   "pass": true,
+   "diff": []
+  },
+  {
+   "case": "ex_extended.yaml",
+   "name": "extension moves the end date outside 60 days",
+   "pass": true,
+   "diff": []
+  },
+  {
+   "case": "lf_extension_too_short.yaml",
+   "name": "extended due date still leaves the payment late",
+   "pass": true,
+   "diff": []
+  },
+  {
+   "case": "lf_threeletter_ids_excess.yaml",
+   "name": "late fee billed on a three-letter invoice number: excess",
+   "pass": true,
+   "diff": []
+  },
+  {
+   "case": "lf_threeletter_ids_ok.yaml",
+   "name": "late fee billed on a three-letter invoice number: ok",
+   "pass": true,
+   "diff": []
+  },
+  {
+   "case": "oc_band_edge_clean.yaml",
+   "name": "100 kg sits in the 100-299.5 band",
+   "pass": true,
+   "diff": []
+  },
+  {
+   "case": "oc_feedback_close.yaml",
+   "name": "feedback closes a dispute",
+   "pass": true,
+   "diff": []
+  },
+  {
+   "case": "oc_injection_ignored.yaml",
+   "name": "instruction aimed at the AI is data, not a command",
+   "pass": true,
+   "diff": []
+  },
+  {
+   "case": "oc_minimum_charge.yaml",
+   "name": "billed above the per-shipment minimum",
+   "pass": true,
+   "diff": []
+  },
+  {
+   "case": "oc_period_boundary.yaml",
+   "name": "pickup date from tracking puts the shipment in period P1",
+   "pass": true,
+   "diff": []
+  },
+  {
+   "case": "oc_period_boundary_clean.yaml",
+   "name": "pickup on the first day of P2 is billed correctly",
+   "pass": true,
+   "diff": []
+  },
+  {
+   "case": "sample_conflict.yaml",
+   "name": "amendment and rate notice disagree",
+   "pass": true,
+   "diff": []
+  },
+  {
+   "case": "sample_overcharge.yaml",
+   "name": "wrong rate on one freight line",
+   "pass": true,
+   "diff": []
+  },
+  {
+   "case": "wb_quoted_waiver.yaml",
+   "name": "waiver is only quoted in a forward",
+   "pass": true,
+   "diff": []
+  },
+  {
+   "case": "wb_unlisted_sender.yaml",
+   "name": "waiver written by someone outside Schedule 1",
+   "pass": true,
+   "diff": []
+  },
+  {
+   "case": "xc_unauthorised_notice.yaml",
+   "name": "rate notice from an unlisted sender is no conflict",
+   "pass": true,
+   "diff": []
+  }
+ ]
+}

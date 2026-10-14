@@ -1,0 +1,11 @@
+name: extended due date still leaves the payment late
+mailbox: evals/mailboxes/lf_extension_too_short
+as_of: '2033-02-28'
+mode: supervised
+expect:
+  key:
+    invoice_id: TX-US-2032-5496
+    class: late_fee_not_owed
+  verdict: no_finding
+why: 'Extended to 2032-08-05, paid 2032-08-17: 12 days late, past the 5 grace days,
+  one month at 1.86% of 680.12 = 12.65 which is what was billed.'

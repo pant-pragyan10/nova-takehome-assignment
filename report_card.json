@@ -449,57 +449,7 @@
        "step": "ingest",
        "rc": 0,
        "stderr": "",
-       "secs": 1.1
-      },
-      {
-       "step": "report",
-       "rc": 0,
-       "stderr": "",
-       "secs": 0.1
-      },
-      {
-       "step": "feedback",
-       "rc": 0,
-       "stderr": "",
-       "secs": 0.1
-      }
-     ],
-     "items": 7
-    },
-    {
-     "batch": "batch_02",
-     "as_of": "2035-09-30",
-     "error": null,
-     "steps": [
-      {
-       "step": "ingest",
-       "rc": 0,
-       "stderr": "",
-       "secs": 5.6
-      },
-      {
-       "step": "report",
-       "rc": 0,
-       "stderr": "",
-       "secs": 0.2
-      }
-     ],
-     "items": 17
-    }
-   ]
-  },
-  "autonomous": {
-   "W1": [
-    {
-     "batch": "batch_01",
-     "as_of": "2035-05-31",
-     "error": null,
-     "steps": [
-      {
-       "step": "ingest",
-       "rc": 0,
-       "stderr": "",
-       "secs": 1.1
+       "secs": 1.0
       },
       {
        "step": "report",
@@ -526,6 +476,56 @@
        "rc": 0,
        "stderr": "",
        "secs": 5.5
+      },
+      {
+       "step": "report",
+       "rc": 0,
+       "stderr": "",
+       "secs": 0.2
+      }
+     ],
+     "items": 17
+    }
+   ]
+  },
+  "autonomous": {
+   "W1": [
+    {
+     "batch": "batch_01",
+     "as_of": "2035-05-31",
+     "error": null,
+     "steps": [
+      {
+       "step": "ingest",
+       "rc": 0,
+       "stderr": "",
+       "secs": 0.9
+      },
+      {
+       "step": "report",
+       "rc": 0,
+       "stderr": "",
+       "secs": 0.1
+      },
+      {
+       "step": "feedback",
+       "rc": 0,
+       "stderr": "",
+       "secs": 0.1
+      }
+     ],
+     "items": 7
+    },
+    {
+     "batch": "batch_02",
+     "as_of": "2035-09-30",
+     "error": null,
+     "steps": [
+      {
+       "step": "ingest",
+       "rc": 0,
+       "stderr": "",
+       "secs": 5.6
       },
       {
        "step": "report",

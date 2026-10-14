@@ -1,0 +1,11 @@
+name: extension moves the end date outside 60 days
+mailbox: evals/mailboxes/ex_extended
+as_of: '2034-02-28'
+mode: supervised
+expect:
+  key:
+    contract_id: TBX-US-EXP-E24
+    class: expiry
+  verdict: no_finding
+why: 'End date is now 2035-03-20, more than 60 days after as_of: the alert must be
+  gone.'

@@ -1,0 +1,41 @@
+{
+ "schema_version": "1.0",
+ "world": "E1",
+ "after_batch": "batch_01",
+ "decided_at": "2032-03-01T10:00:00Z",
+ "decided_by": {
+  "name": "Cosima Rathbone",
+  "role": "AP Manager",
+  "entity": "QMP-US"
+ },
+ "items": [
+  {
+   "item_id": "fb-e-01",
+   "finding_key": {
+    "invoice_id": "TX-US-2032-5394",
+    "class": "overcharge"
+   },
+   "solicited": false,
+   "decision": "close",
+   "fact": {
+    "type": "dispute_closed",
+    "subject": {
+     "invoice_id": "TX-US-2032-5394"
+    },
+    "value": {
+     "status": "closed"
+    },
+    "evidence": "Settled on a call"
+   },
+   "scope": {
+    "kind": "one_off",
+    "applies_to": {
+     "invoice_id": "TX-US-2032-5394"
+    },
+    "valid_from": "2032-03-01",
+    "valid_to": null
+   },
+   "note": "closed"
+  }
+ ]
+}

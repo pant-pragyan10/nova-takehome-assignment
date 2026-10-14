@@ -1,0 +1,12 @@
+name: duplicate of 5000+ goes to human review (supervised)
+mailbox: evals/mailboxes/du_big_supervised
+as_of: '2032-03-01'
+mode: supervised
+expect:
+  key:
+    invoice_id: TX-US-2032-9100
+    class: duplicate
+  verdict: finding
+  amount_usd: '6453.80'
+  action: human_review
+why: 'Invoice total >= $5,000.00: an outbound remedy needs a person in either mode.'

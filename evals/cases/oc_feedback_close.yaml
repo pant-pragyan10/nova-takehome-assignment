@@ -1,0 +1,12 @@
+name: feedback closes a dispute
+mailbox: evals/mailboxes/oc_feedback_close
+as_of: '2032-08-31'
+mode: supervised
+expect:
+  key:
+    invoice_id: TX-US-2032-5394
+    class: overcharge
+  verdict: no_finding
+why: A person closed this key after batch_01; it must not be raised again.
+feedback:
+  batch_01: evals/feedback/oc_feedback_close.json

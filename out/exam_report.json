@@ -411,52 +411,6 @@
    "missing_doc": null,
    "supersedes": [],
    "learned_at": null
-  },
-  {
-   "id": "late_fee_not_owed:CDU-3151580",
-   "class": "late_fee_not_owed",
-   "invoice_id": "CDU-3151580",
-   "verdict": "finding",
-   "amount_usd": "45472.75",
-   "amount_range": null,
-   "deadline": null,
-   "action": "human_review",
-   "confidence": 0.93,
-   "evidence": [
-    {
-     "doc": "batch_02/0021.eml#CDU-3151580.pdf",
-     "page": 1,
-     "quote": "- - Late fee on CDU-3051334: USD 528.14 overdue, month 1 @ 1.49% 1 month 1.49% 7.87 -"
-    },
-    {
-     "doc": "batch_02/0023.eml#ap-register-2031-02-28.xlsx",
-     "page": 1,
-     "quote": "CDU-3051334 | 2030-12-07 | due 2031-01-06 | USD 528.14 | paid | 2031-02-09"
-    },
-    {
-     "doc": "batch_02/0015.eml",
-     "page": 1,
-     "quote": "To whom it may concern,  Invoice CDU-3051334 now falls due on 2031-01-26 (extended under clause 10.5)."
-    },
-    {
-     "doc": "batch_01/0003.eml#MSA-CDA-US-EXP-E91.pdf",
-     "page": 4,
-     "quote": "10.2 Late fee. Undisputed amounts outstanding for more than 0 days past the due date incur a late fee of 1.49% per month or part thereof."
-    },
-    {
-     "doc": "batch_01/0003.eml#MSA-CDA-US-EXP-E91.pdf",
-     "page": 4,
-     "quote": "10.3 Compounding. Late fees unpaid at the end of a month are added to the overdue balance, and the next month's fee is charged on principal plus unpaid prior late fees. Fees shown paid leave the base."
-    },
-    {
-     "doc": "batch_01/0003.eml#MSA-CDA-US-EXP-E91.pdf",
-     "page": 4,
-     "quote": "10.5 Extension of due date. A due date may be extended by written notice from the Carrier's Authorised Person (payment terms); the extended date replaces the due date for clause 10.2."
-    }
-   ],
-   "missing_doc": null,
-   "supersedes": [],
-   "learned_at": null
   }
  ],
  "portfolio": {
@@ -543,6 +497,33 @@
     "learned_at": null
    }
   ],
-  "late_fee_risk": []
+  "late_fee_risk": [
+   {
+    "id": "late_fee_risk:CDU-3151571",
+    "class": "late_fee_risk",
+    "invoice_id": "CDU-3151571",
+    "verdict": "finding",
+    "amount_usd": "10.29",
+    "amount_range": null,
+    "deadline": "2031-03-10",
+    "action": "internal:payment_reminder",
+    "confidence": 0.92,
+    "evidence": [
+     {
+      "doc": "batch_02/0023.eml#ap-register-2031-02-28.xlsx",
+      "page": 1,
+      "quote": "CDU-3151571 | 2031-02-08 | due 2031-03-10 | USD 690.34 | open | -"
+     },
+     {
+      "doc": "batch_01/0003.eml#MSA-CDA-US-EXP-E91.pdf",
+      "page": 4,
+      "quote": "10.2 Late fee. Undisputed amounts outstanding for more than 0 days past the due date incur a late fee of 1.49% per month or part thereof."
+     }
+    ],
+    "missing_doc": null,
+    "supersedes": [],
+    "learned_at": null
+   }
+  ]
  }
 }

@@ -1,0 +1,12 @@
+name: rate notice from an unlisted sender is no conflict
+mailbox: evals/mailboxes/xc_unauthorised_notice
+as_of: '2032-11-30'
+mode: supervised
+expect:
+  key:
+    invoice_id: TX-US-2032-5166
+    class: overcharge
+  verdict: finding
+  amount_usd: '20.87'
+  action: draft:dispute
+why: 'Only the signed amendment has authority: 421.62 billed against 400.75 correct.'

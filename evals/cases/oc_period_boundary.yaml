@@ -1,0 +1,13 @@
+name: pickup date from tracking puts the shipment in period P1
+mailbox: evals/mailboxes/oc_period_boundary
+as_of: '2032-08-31'
+mode: supervised
+expect:
+  key:
+    invoice_id: TX-US-2032-9001
+    class: overcharge
+  verdict: finding
+  amount_usd: '28.39'
+  action: draft:dispute
+why: 'Invoice prints 2032-06-17 (P2) but tracking says PICKED_UP 2032-06-16 (last
+  day of P1): P1 rate 6.01, not 6.16.'

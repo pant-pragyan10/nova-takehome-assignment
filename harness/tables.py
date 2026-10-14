@@ -186,7 +186,7 @@ def parse_register(pages) -> list[dict]:
             continue
         dates = [re.search(DATE, c).group(0) if re.search(DATE, c) else None for c in cells]
         due = next((re.search(DATE, c).group(0) for c in cells if re.match(r"^due\b", c, re.I) and re.search(DATE, c)), None)
-        amt = next((re.match(rf"^([A-Z]{{3}})\s*({NUM})$", c) for c in cells if re.match(rf"^[A-Z]{{3}}\s*{NUM}$", c)), None)
+        amt = next((re.match(rf"^([A-Z]{{3}})\s*({NUM})$", c) for c in cells[1:] if re.match(rf"^[A-Z]{{3}}\s*{NUM}$", c)), None)
         status = next((c.lower() for c in cells if c.lower() in ("paid", "open", "unpaid", "scheduled", "disputed", "partial", "partially paid", "credited")), None)
         plain_dates = [re.search(DATE, c).group(0) for c in cells[1:] if re.fullmatch(DATE, c)]
         inv_date = plain_dates[0] if plain_dates else None

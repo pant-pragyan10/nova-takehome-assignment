@@ -1,0 +1,12 @@
+name: waiver is only quoted in a forward
+mailbox: evals/mailboxes/wb_quoted_waiver
+as_of: '2034-02-28'
+mode: supervised
+expect:
+  key:
+    invoice_id: TX-US-2033-5337
+    class: waived_but_billed
+  verdict: cannot_determine
+  action: draft:request_document
+why: 'Quoted text has no authority and the original is not held: ask the sender /
+  Key Account Manager for it.'

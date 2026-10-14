@@ -4,10 +4,10 @@
  "mode": "supervised",
  "source": "exam_report.json",
  "totals": {
-  "total_overpayment": "49320.45",
+  "total_overpayment": "3847.70",
   "cashback_owed": "4307.34",
-  "late_fees_avoided": "0.00",
-  "total_savings": "53627.79"
+  "late_fees_avoided": "10.29",
+  "total_savings": "8165.33"
  },
  "classes": {
   "overcharge": {
@@ -47,15 +47,13 @@
    }
   },
   "late_fee_not_owed": {
-   "count": 2,
-   "amount_usd": "45494.33",
+   "count": 1,
+   "amount_usd": "21.58",
    "ids": [
-    "CDU-3051277",
-    "CDU-3151580"
+    "CDU-3051277"
    ],
    "amounts_by_id": {
-    "CDU-3051277": "21.58",
-    "CDU-3151580": "45472.75"
+    "CDU-3051277": "21.58"
    }
   },
   "cashback": {
@@ -69,11 +67,17 @@
    }
   },
   "late_fee_risk": {
-   "count": 0,
-   "amount_usd": "0.00",
-   "ids": [],
-   "amounts_by_id": {},
-   "deadlines_by_id": {}
+   "count": 1,
+   "amount_usd": "10.29",
+   "ids": [
+    "CDU-3151571"
+   ],
+   "amounts_by_id": {
+    "CDU-3151571": "10.29"
+   },
+   "deadlines_by_id": {
+    "CDU-3151571": "2031-03-10"
+   }
   },
   "expiry": {
    "count": 1,

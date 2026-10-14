@@ -1,0 +1,10 @@
+name: pickup on the first day of P2 is billed correctly
+mailbox: evals/mailboxes/oc_period_boundary_clean
+as_of: '2032-08-31'
+mode: supervised
+expect:
+  key:
+    invoice_id: TX-US-2032-9001
+    class: overcharge
+  verdict: no_finding
+why: Tracking PICKED_UP 2032-06-17 is P2; 6.16 is the P2 rate for 100-299.5 kg.

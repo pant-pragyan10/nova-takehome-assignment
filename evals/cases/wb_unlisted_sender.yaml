@@ -1,0 +1,11 @@
+name: waiver written by someone outside Schedule 1
+mailbox: evals/mailboxes/wb_unlisted_sender
+as_of: '2034-02-28'
+mode: supervised
+expect:
+  key:
+    invoice_id: TX-US-2033-5337
+    class: waived_but_billed
+  verdict: no_finding
+why: 'Clause 11.1: Schedule 1 is exhaustive; the sender''s address is not the Schedule
+  1 address, so the charge stands.'

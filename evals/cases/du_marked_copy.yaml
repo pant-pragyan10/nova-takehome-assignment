@@ -1,0 +1,10 @@
+name: resend marked as a copy for your records
+mailbox: evals/mailboxes/du_marked_copy
+as_of: '2033-08-31'
+mode: supervised
+expect:
+  key:
+    invoice_id: TX-US-2033-5511
+    class: duplicate
+  verdict: no_finding
+why: A copy of an invoice is not a second request for payment.
