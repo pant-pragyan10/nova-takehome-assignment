@@ -1,0 +1,548 @@
+{
+ "schema_version": "1.0",
+ "as_of": "2031-02-28",
+ "mode": "supervised",
+ "findings": [
+  {
+   "id": "waived_but_billed:CDU-3051259",
+   "class": "waived_but_billed",
+   "invoice_id": "CDU-3051259",
+   "verdict": "finding",
+   "amount_usd": "52.70",
+   "amount_range": null,
+   "deadline": null,
+   "action": "draft:dispute",
+   "confidence": 0.95,
+   "evidence": [
+    {
+     "doc": "batch_01/0008.eml#CDU-3051259.pdf",
+     "page": 1,
+     "quote": "USE2-INS2 CA10343321 Delivery fee 1 shpt 52.70 52.70 07/06/2030"
+    },
+    {
+     "doc": "batch_01/0007.eml",
+     "page": 1,
+     "quote": "Dear Sir or Madam,  Please treat the Delivery fee on AWB CA10343321 as waived."
+    },
+    {
+     "doc": "batch_01/0003.eml#MSA-CDA-US-EXP-E91.pdf",
+     "page": 11,
+     "quote": "Thea Kapadia, Customer Finance Lead, CDA-US: waivers, payment_terms <thea.kapadia@caldrith.example>"
+    },
+    {
+     "doc": "batch_01/0003.eml#MSA-CDA-US-EXP-E91.pdf",
+     "page": 4,
+     "quote": "11.1 Waiver authority. A charge may be waived only in writing by a person listed in Schedule 1 for waivers. Schedule 1 is exhaustive."
+    },
+    {
+     "doc": "batch_01/0003.eml#MSA-CDA-US-EXP-E91.pdf",
+     "page": 4,
+     "quote": "11.2 Scope of waiver. A waiver applies only to the charges and shipments it names. No waiver is a waiver of any later charge, and no course of dealing creates one."
+    }
+   ],
+   "missing_doc": null,
+   "supersedes": [],
+   "learned_at": null
+  },
+  {
+   "id": "waived_but_billed:CDU-3051323",
+   "class": "waived_but_billed",
+   "invoice_id": "CDU-3051323",
+   "verdict": "finding",
+   "amount_usd": "52.70",
+   "amount_range": null,
+   "deadline": null,
+   "action": "draft:dispute",
+   "confidence": 0.95,
+   "evidence": [
+    {
+     "doc": "batch_02/0011.eml#CDU-3051323.pdf",
+     "page": 1,
+     "quote": "USE2-INW1 CA75329761 Delivery fee 1 shpt 52.70 52.70 14/10/2030"
+    },
+    {
+     "doc": "batch_02/0009.eml",
+     "page": 1,
+     "quote": "Good afternoon Odette,  The Delivery fee billed against AWB CA75329761 is waived, with our apologies."
+    },
+    {
+     "doc": "batch_01/0003.eml#MSA-CDA-US-EXP-E91.pdf",
+     "page": 11,
+     "quote": "Thea Kapadia, Customer Finance Lead, CDA-US: waivers, payment_terms <thea.kapadia@caldrith.example>"
+    },
+    {
+     "doc": "batch_01/0003.eml#MSA-CDA-US-EXP-E91.pdf",
+     "page": 4,
+     "quote": "11.1 Waiver authority. A charge may be waived only in writing by a person listed in Schedule 1 for waivers. Schedule 1 is exhaustive."
+    },
+    {
+     "doc": "batch_01/0003.eml#MSA-CDA-US-EXP-E91.pdf",
+     "page": 4,
+     "quote": "11.2 Scope of waiver. A waiver applies only to the charges and shipments it names. No waiver is a waiver of any later charge, and no course of dealing creates one."
+    }
+   ],
+   "missing_doc": null,
+   "supersedes": [],
+   "learned_at": null
+  },
+  {
+   "id": "duplicate:CDU-3051273",
+   "class": "duplicate",
+   "invoice_id": "CDU-3051273",
+   "verdict": "finding",
+   "amount_usd": "3235.24",
+   "amount_range": null,
+   "deadline": null,
+   "action": "draft:dispute",
+   "confidence": 0.95,
+   "evidence": [
+    {
+     "doc": "batch_02/0023.eml#ap-register-2031-02-28.xlsx",
+     "page": 1,
+     "quote": "CDU-3051273 | 2030-07-29 | due 2030-08-28 | USD 3235.24 | paid | 2030-08-27"
+    },
+    {
+     "doc": "batch_01/0017.eml",
+     "page": 1,
+     "quote": "Subject: Invoice CDU-3051273"
+    },
+    {
+     "doc": "batch_01/0013.eml#CDU-3051273.pdf",
+     "page": 1,
+     "quote": "Total payable USD 3,235.24"
+    },
+    {
+     "doc": "batch_01/0017.eml#CDU-3051273.pdf",
+     "page": 1,
+     "quote": "Total payable USD 3,235.24"
+    }
+   ],
+   "missing_doc": null,
+   "supersedes": [],
+   "learned_at": null
+  },
+  {
+   "id": "overcharge:CDU-3051266",
+   "class": "overcharge",
+   "invoice_id": "CDU-3051266",
+   "verdict": "finding",
+   "amount_usd": "244.37",
+   "amount_range": null,
+   "deadline": null,
+   "action": "draft:dispute",
+   "confidence": 0.95,
+   "evidence": [
+    {
+     "doc": "batch_01/0010.eml#CDU-3051266.pdf",
+     "page": 1,
+     "quote": "USC1-INW1 CA53442004 Air freight 547 kg 7.16 3,916.52 19/06/2030"
+    },
+    {
+     "doc": "batch_01/0003.eml#MSA-CDA-US-EXP-E91.pdf",
+     "page": 8,
+     "quote": "USC1-INW1 300+ kg 6.79 7.24"
+    },
+    {
+     "doc": "batch_01/0003.eml#MSA-CDA-US-EXP-E91.pdf",
+     "page": 8,
+     "quote": "USC1-INW1 minimum charge 96.00 96.00"
+    },
+    {
+     "doc": "batch_01/0003.eml#MSA-CDA-US-EXP-E91.pdf",
+     "page": 3,
+     "quote": "3.2 Pricing date. Each shipment is priced at the rates, surcharges and fees in force on its Pickup Date."
+    },
+    {
+     "doc": "batch_01/0003.eml#MSA-CDA-US-EXP-E91.pdf",
+     "page": 3,
+     "quote": "3.4 Minimum charge. The per-shipment minimum in Annex A applies where rate x chargeable weight is lower. Each shipment is rated at the weight band that contains its chargeable weight."
+    },
+    {
+     "doc": "batch_01/0016.eml#tracking-2030-01-01.xlsx",
+     "page": 1,
+     "quote": "CA53442004 | PICKED_UP | 2030-06-19 | USC1 | -"
+    },
+    {
+     "doc": "batch_01/0010.eml#CDU-3051266.pdf",
+     "page": 1,
+     "quote": "USC1-INW1 CA53442004 Fuel surcharge 3,916.52 20.74% 812.29 19/06/2030"
+    },
+    {
+     "doc": "batch_01/0003.eml#MSA-CDA-US-EXP-E91.pdf",
+     "page": 9,
+     "quote": "2030-06 20.74%"
+    },
+    {
+     "doc": "batch_01/0003.eml#MSA-CDA-US-EXP-E91.pdf",
+     "page": 3,
+     "quote": "4.1 Fuel surcharge. Fuel surcharge is the Annex C percentage for the month of the Pickup Date, applied to the base freight charge only. It does not apply to Annex D accessorials or the security surcharge."
+    }
+   ],
+   "missing_doc": null,
+   "supersedes": [],
+   "learned_at": null
+  },
+  {
+   "id": "overcharge:CDU-3051286",
+   "class": "overcharge",
+   "invoice_id": "CDU-3051286",
+   "verdict": "cannot_determine",
+   "amount_usd": null,
+   "amount_range": null,
+   "deadline": null,
+   "action": "draft:request_document",
+   "confidence": 0.9,
+   "evidence": [
+    {
+     "doc": "batch_01/0004.eml#CDA-US-EXP-E91-AMD-1.pdf",
+     "page": 1,
+     "quote": "2. The Annex A rates for lane(s) USW2-USW1 are deleted and replaced as follows: Annex A rev 2 (attached) applies from 2030-09-07 to lane(s) USW2-USW1."
+    }
+   ],
+   "missing_doc": {
+    "name": "Annex A rev 2",
+    "holder": {
+     "party": "CDA-US",
+     "person": "Joaquin Rathbone",
+     "role": "Pricing Manager"
+    }
+   },
+   "supersedes": [],
+   "learned_at": null
+  },
+  {
+   "id": "overcharge:CDU-3051297",
+   "class": "overcharge",
+   "invoice_id": "CDU-3051297",
+   "verdict": "finding",
+   "amount_usd": "155.65",
+   "amount_range": null,
+   "deadline": null,
+   "action": "draft:dispute",
+   "confidence": 0.95,
+   "evidence": [
+    {
+     "doc": "batch_02/0004.eml#CDU-3051297.pdf",
+     "page": 1,
+     "quote": "USE2-INS2 CA24035181 DG handling 1 shpt 155.65 155.65 20/09/2030"
+    },
+    {
+     "doc": "batch_02/0004.eml#DGD-CA24035181.pdf",
+     "page": 1,
+     "quote": "UN1845 Dry ice 18.6 kg - refrigerant only"
+    },
+    {
+     "doc": "batch_01/0003.eml#MSA-CDA-US-EXP-E91.pdf",
+     "page": 3,
+     "quote": "5.2 Dry ice. Dry ice (UN1845) used solely as a refrigerant for non-dangerous goods is billed at the Dry Ice Handling Fee in Annex D, once per shipment (not per package or per kg), and does not attract the Dangerous Goods Fee."
+    },
+    {
+     "doc": "batch_01/0003.eml#MSA-CDA-US-EXP-E91.pdf",
+     "page": 10,
+     "quote": "DG Dangerous goods fee 155.65 USD per shipment"
+    }
+   ],
+   "missing_doc": null,
+   "supersedes": [],
+   "learned_at": null
+  },
+  {
+   "id": "overcharge:CDU-3051302",
+   "class": "overcharge",
+   "invoice_id": "CDU-3051302",
+   "verdict": "conflict",
+   "amount_usd": null,
+   "amount_range": [
+    "0.00",
+    "61.93"
+   ],
+   "deadline": null,
+   "action": "escalate",
+   "confidence": 0.9,
+   "evidence": [
+    {
+     "doc": "batch_02/0005.eml#CDU-3051302.pdf",
+     "page": 1,
+     "quote": "USE2-USC3 CA60423720 Air freight 133 kg 4.38 582.54 21/09/2030"
+    },
+    {
+     "doc": "batch_01/0004.eml#CDA-US-EXP-E91-AMD-1.pdf",
+     "page": 1,
+     "quote": "USE2-USC3 minimum charge 78.30 USD"
+    },
+    {
+     "doc": "batch_02/0001.eml",
+     "page": 1,
+     "quote": "USE2-USC3 minimum charge = USD 85.98"
+    },
+    {
+     "doc": "batch_01/0004.eml#CDA-US-EXP-E91-AMD-1.pdf",
+     "page": 1,
+     "quote": "USE2-USC3 100-299.5 kg 3.99 USD"
+    },
+    {
+     "doc": "batch_02/0001.eml",
+     "page": 1,
+     "quote": "USE2-USC3 100-299.5 kg = USD 4.38"
+    },
+    {
+     "doc": "batch_01/0003.eml#MSA-CDA-US-EXP-E91.pdf",
+     "page": 4,
+     "quote": "13.3 Unranked instruments. Where a rate notice under clause 3.5 and an amendment state different rates for the same lane and period, the parties shall resolve the difference jointly; neither prevails automatically."
+    },
+    {
+     "doc": "batch_01/0003.eml#MSA-CDA-US-EXP-E91.pdf",
+     "page": 3,
+     "quote": "3.5 Rate notices. The Carrier may change Annex A rates by written notice from an Authorised Person (rates), effective on the date stated in the notice."
+    }
+   ],
+   "missing_doc": null,
+   "supersedes": [],
+   "learned_at": null
+  },
+  {
+   "id": "overcharge:CDI-3031-0306",
+   "class": "overcharge",
+   "invoice_id": "CDI-3031-0306",
+   "verdict": "finding",
+   "amount_usd": "85.46",
+   "amount_range": null,
+   "deadline": null,
+   "action": "draft:dispute",
+   "confidence": 0.88,
+   "evidence": [
+    {
+     "doc": "batch_02/0016.eml#CDI-3031-0306.pdf",
+     "page": 1,
+     "quote": "INE2-USW1 CA68214550 Air freight 274kg 330.42 90,535.08 06/01/2031"
+    },
+    {
+     "doc": "batch_01/0001.eml#MSA-CDA-IN-EXP-E91.pdf",
+     "page": 8,
+     "quote": "INE2-USW1 100-299.5 kg 323.51 308.76"
+    },
+    {
+     "doc": "batch_01/0001.eml#MSA-CDA-IN-EXP-E91.pdf",
+     "page": 8,
+     "quote": "INE2-USW1 minimum charge 7842.00 7842.00"
+    },
+    {
+     "doc": "batch_01/0001.eml#MSA-CDA-IN-EXP-E91.pdf",
+     "page": 3,
+     "quote": "3.2 Pricing date. Each shipment is priced at the rates, surcharges and fees in force on its Pickup Date."
+    },
+    {
+     "doc": "batch_01/0001.eml#MSA-CDA-IN-EXP-E91.pdf",
+     "page": 3,
+     "quote": "3.4 Minimum charge. The per-shipment minimum in Annex A applies where rate x chargeable weight is lower. Each shipment is rated at the weight band that contains its chargeable weight."
+    },
+    {
+     "doc": "batch_02/0022.eml#tracking-2030-09-01.xlsx",
+     "page": 1,
+     "quote": "CA68214550 | PICKED_UP | 2031-01-06 | INE2 | -"
+    },
+    {
+     "doc": "batch_02/0016.eml#CDI-3031-0306.pdf",
+     "page": 1,
+     "quote": "INE2-USW1 CA68214550 Fuel surcharge 90,535.08 25.33% 22,932.54 06/01/2031"
+    },
+    {
+     "doc": "batch_01/0001.eml#MSA-CDA-IN-EXP-E91.pdf",
+     "page": 9,
+     "quote": "2031-01 25.33%"
+    },
+    {
+     "doc": "batch_01/0001.eml#MSA-CDA-IN-EXP-E91.pdf",
+     "page": 3,
+     "quote": "4.1 Fuel surcharge. Fuel surcharge is the Annex C percentage for the month of the Pickup Date, applied to the base freight charge only. It does not apply to Annex D accessorials or the security surcharge."
+    },
+    {
+     "doc": "batch_01/0001.eml#MSA-CDA-IN-EXP-E91.pdf",
+     "page": 11,
+     "quote": "2031-01 87.04"
+    }
+   ],
+   "missing_doc": null,
+   "supersedes": [],
+   "learned_at": null
+  },
+  {
+   "id": "late_fee_not_owed:CDU-3051277",
+   "class": "late_fee_not_owed",
+   "invoice_id": "CDU-3051277",
+   "verdict": "finding",
+   "amount_usd": "21.58",
+   "amount_range": null,
+   "deadline": null,
+   "action": "draft:dispute",
+   "confidence": 0.93,
+   "evidence": [
+    {
+     "doc": "batch_01/0015.eml#CDU-3051277.pdf",
+     "page": 1,
+     "quote": "- - Late fee on CDU-3051262: USD 1448.48 overdue, month 1 @ 1.49% 1 month 1.49% 21.58 -"
+    },
+    {
+     "doc": "batch_02/0023.eml#ap-register-2031-02-28.xlsx",
+     "page": 1,
+     "quote": "CDU-3051262 | 2030-06-15 | due 2030-07-15 | USD 1448.48 | paid | 2030-07-23"
+    },
+    {
+     "doc": "batch_01/0011.eml",
+     "page": 1,
+     "quote": "Good afternoon Odette,  Invoice CDU-3051262 now falls due on 2030-07-25 (extended under clause 10.5)."
+    },
+    {
+     "doc": "batch_01/0003.eml#MSA-CDA-US-EXP-E91.pdf",
+     "page": 4,
+     "quote": "10.2 Late fee. Undisputed amounts outstanding for more than 0 days past the due date incur a late fee of 1.49% per month or part thereof."
+    },
+    {
+     "doc": "batch_01/0003.eml#MSA-CDA-US-EXP-E91.pdf",
+     "page": 4,
+     "quote": "10.3 Compounding. Late fees unpaid at the end of a month are added to the overdue balance, and the next month's fee is charged on principal plus unpaid prior late fees. Fees shown paid leave the base."
+    },
+    {
+     "doc": "batch_01/0003.eml#MSA-CDA-US-EXP-E91.pdf",
+     "page": 4,
+     "quote": "10.5 Extension of due date. A due date may be extended by written notice from the Carrier's Authorised Person (payment terms); the extended date replaces the due date for clause 10.2."
+    }
+   ],
+   "missing_doc": null,
+   "supersedes": [],
+   "learned_at": null
+  },
+  {
+   "id": "late_fee_not_owed:CDU-3151580",
+   "class": "late_fee_not_owed",
+   "invoice_id": "CDU-3151580",
+   "verdict": "finding",
+   "amount_usd": "45472.75",
+   "amount_range": null,
+   "deadline": null,
+   "action": "human_review",
+   "confidence": 0.93,
+   "evidence": [
+    {
+     "doc": "batch_02/0021.eml#CDU-3151580.pdf",
+     "page": 1,
+     "quote": "- - Late fee on CDU-3051334: USD 528.14 overdue, month 1 @ 1.49% 1 month 1.49% 7.87 -"
+    },
+    {
+     "doc": "batch_02/0023.eml#ap-register-2031-02-28.xlsx",
+     "page": 1,
+     "quote": "CDU-3051334 | 2030-12-07 | due 2031-01-06 | USD 528.14 | paid | 2031-02-09"
+    },
+    {
+     "doc": "batch_02/0015.eml",
+     "page": 1,
+     "quote": "To whom it may concern,  Invoice CDU-3051334 now falls due on 2031-01-26 (extended under clause 10.5)."
+    },
+    {
+     "doc": "batch_01/0003.eml#MSA-CDA-US-EXP-E91.pdf",
+     "page": 4,
+     "quote": "10.2 Late fee. Undisputed amounts outstanding for more than 0 days past the due date incur a late fee of 1.49% per month or part thereof."
+    },
+    {
+     "doc": "batch_01/0003.eml#MSA-CDA-US-EXP-E91.pdf",
+     "page": 4,
+     "quote": "10.3 Compounding. Late fees unpaid at the end of a month are added to the overdue balance, and the next month's fee is charged on principal plus unpaid prior late fees. Fees shown paid leave the base."
+    },
+    {
+     "doc": "batch_01/0003.eml#MSA-CDA-US-EXP-E91.pdf",
+     "page": 4,
+     "quote": "10.5 Extension of due date. A due date may be extended by written notice from the Carrier's Authorised Person (payment terms); the extended date replaces the due date for clause 10.2."
+    }
+   ],
+   "missing_doc": null,
+   "supersedes": [],
+   "learned_at": null
+  }
+ ],
+ "portfolio": {
+  "cashback": [
+   {
+    "id": "cashback:CDA-US-EXP-E91/2030-Q3/rebate",
+    "class": "cashback",
+    "contract_id": "CDA-US-EXP-E91",
+    "period": "2030-Q3",
+    "credit_type": "rebate",
+    "verdict": "finding",
+    "amount_usd": "4307.34",
+    "amount_range": null,
+    "deadline": null,
+    "action": "draft:claim_credit",
+    "confidence": 0.9,
+    "evidence": [
+     {
+      "doc": "batch_01/0003.eml#MSA-CDA-US-EXP-E91.pdf",
+      "page": 4,
+      "quote": "7.1 Volume rebate. The Carrier shall credit a rebate on each Quarter's Qualifying Spend (QS) at the tier reached: QS >= USD 77,000.00: 5%; QS >= USD 132,000.00: 7.5%; QS >= USD 208,000.00: 10%. The tier rate applies to all QS in the Quarter."
+     },
+     {
+      "doc": "batch_01/0003.eml#MSA-CDA-US-EXP-E91.pdf",
+      "page": 3,
+      "quote": "1.1 Qualifying Spend. Qualifying Spend means freight charges (base freight, fuel, security surcharge and Annex D accessorials) on invoices dated in the period, net of all credit notes dated in the period whatever invoice they reference (rebate and improvement credits excepted). It excludes taxes (sales tax, GST), duties and disbursements, late fees, and rebate or improvement credits. INR amounts are converted per invoice at the Annex F rate for the month of the invoice date."
+     },
+     {
+      "doc": "batch_01/0012.eml#CDU-3051268.pdf",
+      "page": 1,
+      "quote": "Total payable USD 49,988.69"
+     },
+     {
+      "doc": "batch_01/0013.eml#CDU-3051273.pdf",
+      "page": 1,
+      "quote": "Total payable USD 3,235.24"
+     },
+     {
+      "doc": "batch_01/0015.eml#CDU-3051277.pdf",
+      "page": 1,
+      "quote": "Total payable USD 374.41"
+     },
+     {
+      "doc": "batch_02/0002.eml#CDU-3051292.pdf",
+      "page": 1,
+      "quote": "Total payable USD 29,223.67"
+     },
+     {
+      "doc": "batch_02/0003.eml#CDU-3051286.pdf",
+      "page": 1,
+      "quote": "Total payable USD 1,655.21"
+     },
+     {
+      "doc": "batch_02/0004.eml#CDU-3051297.pdf",
+      "page": 1,
+      "quote": "Total payable USD 921.66"
+     }
+    ],
+    "missing_doc": null,
+    "supersedes": [],
+    "learned_at": null
+   }
+  ],
+  "expiry": [
+   {
+    "id": "expiry:CDA-US-EXP-E91",
+    "class": "expiry",
+    "contract_id": "CDA-US-EXP-E91",
+    "verdict": "finding",
+    "amount_usd": null,
+    "amount_range": null,
+    "deadline": "2031-04-01",
+    "action": "internal:alert",
+    "confidence": 0.95,
+    "evidence": [
+     {
+      "doc": "batch_01/0003.eml#MSA-CDA-US-EXP-E91.pdf",
+      "page": 3,
+      "quote": "2.2 Initial term. The initial term runs for 12 months and expires on 2031-04-01."
+     }
+    ],
+    "missing_doc": null,
+    "supersedes": [],
+    "learned_at": null
+   }
+  ],
+  "late_fee_risk": []
+ }
+}

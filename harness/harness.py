@@ -1,40 +1,48 @@
-"""Your harness. The grader calls exactly these three commands, in a fresh process each time:
+"""Freight invoice audit harness. The grader calls exactly these three commands, in a fresh process each time:
 
     python harness.py ingest <batch_dir> --state-dir <dir>
     python harness.py report --as-of YYYY-MM-DD [--mode supervised|autonomous] [--state-dir <dir>] > report.json
     python harness.py feedback <feedback.json> --state-dir <dir>
 
-- ingest: read every .eml in <batch_dir> (attachments inside) and store what you learn under --state-dir. The process
-  is restarted between batches, so everything you need later must be on disk.
-- report: print one report.json (grader/schema/report.schema.json) to stdout. Only documents received on or before
-  --as-of count. --mode defaults to supervised.
-- feedback: take in a person's decisions on what you escalated (feedback.json) and let them change later reports.
+- ingest: read every .eml in <batch_dir> (attachments inside), keep the text on disk, and have the model turn each
+  document into structured facts (understand.py). Everything is stored under --state-dir.
+- report: deterministic. Rebuilds the world from the stored facts of documents received by --as-of and applies the
+  glossary's rules (engine.py). No model calls, so the same state always gives the same report.
+- feedback: store a person's decisions (feedback.py) so later reports use them.
 
-The environment gives ANTHROPIC_API_KEY and ANTHROPIC_BASE_URL. Keep the argument names as they are: grader/validate.py
-checks them. Replace the NotImplementedError bodies with your code.
+Reads ANTHROPIC_API_KEY and ANTHROPIC_BASE_URL from the environment (used by llm.py only).
 """
 from __future__ import annotations
 
 import argparse
+import json
+import os
 import sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 DEFAULT_STATE = ".state"
 
 
 def ingest(batch_dir: str, state_dir: str) -> None:
-    raise NotImplementedError(
-        f"ingest is not written yet: read the .eml files in {batch_dir} and keep what you learn under {state_dir}")
+    import llm
+    import store
+    import understand
+    os.makedirs(state_dir, exist_ok=True)
+    llm.configure(state_dir)
+    store.ingest_batch(batch_dir, state_dir)
+    understand.understand_all(state_dir)
 
 
 def report(as_of: str, mode: str, state_dir: str) -> dict:
-    raise NotImplementedError(
-        f"report is not written yet: return the report.json dict for --as-of {as_of} in {mode} mode "
-        "(see grader/schema/report.schema.json and data/examples/*/expected_finding.json)")
+    import engine
+    return engine.build_report(state_dir, as_of, mode)
 
 
 def feedback(feedback_file: str, state_dir: str) -> None:
-    raise NotImplementedError(
-        f"feedback is not written yet: store the decisions in {feedback_file} under {state_dir} so later reports use them")
+    import feedback as fb
+    os.makedirs(state_dir, exist_ok=True)
+    fb.ingest_feedback(feedback_file, state_dir)
 
 
 def main(argv=None) -> int:
@@ -55,7 +63,6 @@ def main(argv=None) -> int:
         if a.cmd == "ingest":
             ingest(a.batch_dir, a.state_dir)
         elif a.cmd == "report":
-            import json
             json.dump(report(a.as_of, a.mode, a.state_dir), sys.stdout, indent=1)
             sys.stdout.write("\n")
         else:
