@@ -448,8 +448,8 @@
       {
        "step": "ingest",
        "rc": 0,
-       "stderr": "[nova] batch_01/0003.eml: model fallback failed: Messages.create() got an unexpected keyword argument 'temperature'\n",
-       "secs": 3.5
+       "stderr": "",
+       "secs": 6.6
       },
       {
        "step": "report",
@@ -461,7 +461,7 @@
        "step": "feedback",
        "rc": 0,
        "stderr": "",
-       "secs": 0.0
+       "secs": 0.1
       }
      ],
      "items": 7
@@ -474,14 +474,14 @@
       {
        "step": "ingest",
        "rc": 0,
-       "stderr": "[nova] batch_02/0031.eml: model fallback failed: Messages.create() got an unexpected keyword argument 'temperature'\n",
-       "secs": 4.5
+       "stderr": "",
+       "secs": 13.1
       },
       {
        "step": "report",
        "rc": 0,
        "stderr": "",
-       "secs": 0.1
+       "secs": 0.2
       }
      ],
      "items": 17
@@ -498,8 +498,8 @@
       {
        "step": "ingest",
        "rc": 0,
-       "stderr": "[nova] batch_01/0003.eml: model fallback failed: Messages.create() got an unexpected keyword argument 'temperature'\n",
-       "secs": 1.0
+       "stderr": "",
+       "secs": 0.9
       },
       {
        "step": "report",
@@ -511,7 +511,7 @@
        "step": "feedback",
        "rc": 0,
        "stderr": "",
-       "secs": 0.0
+       "secs": 0.1
       }
      ],
      "items": 7
@@ -524,14 +524,14 @@
       {
        "step": "ingest",
        "rc": 0,
-       "stderr": "[nova] batch_02/0031.eml: model fallback failed: Messages.create() got an unexpected keyword argument 'temperature'\n",
-       "secs": 3.5
+       "stderr": "",
+       "secs": 5.1
       },
       {
        "step": "report",
        "rc": 0,
        "stderr": "",
-       "secs": 0.1
+       "secs": 0.2
       }
      ],
      "items": 17
